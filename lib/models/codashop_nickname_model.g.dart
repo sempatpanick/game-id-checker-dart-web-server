@@ -44,10 +44,10 @@ Map<String, dynamic> _$CodashopNicknameModelToJson(
       'paymentChannel': instance.paymentChannel,
       'result': instance.result,
       'channelPrice': instance.channelPrice,
-      'confirmationFields': instance.confirmationFields,
+      'confirmationFields': instance.confirmationFields?.toJson(),
       'success': instance.success,
       'denom': instance.denom,
-      'user': instance.user,
+      'user': instance.user?.toJson(),
       'isThirdPartyMerchant': instance.isThirdPartyMerchant,
       'txnId': instance.txnId,
     };

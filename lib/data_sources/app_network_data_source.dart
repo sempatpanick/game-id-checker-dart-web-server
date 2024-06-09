@@ -32,7 +32,6 @@ class AppRemoteDataSourceImpl implements AppRemoteDataSource {
 
     request.headers.addAll(headers);
     request.bodyFields = data.toJsonString();
-    print(request.bodyFields);
 
     final response = await request.send();
 

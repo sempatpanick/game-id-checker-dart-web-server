@@ -1,16 +1,18 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:id_checker/requests/get_nickname.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
+
+import 'requests/nickname_request.dart';
+
+final nicknameRequest = NicknameRequest();
 
 // Configure routes.
 final _router = Router()
   ..get('/', _rootHandler)
   ..get('/echo/<message>', _echoHandler)
-  ..get('/<gameId>', _getNickname);
+  ..get('/<gameId>', nicknameRequest.getNickname);
 
 Response _rootHandler(Request req) {
   return Response.ok('Hello, World!\n');
@@ -19,77 +21,6 @@ Response _rootHandler(Request req) {
 Response _echoHandler(Request request) {
   final message = request.params['message'];
   return Response.ok('$message\n');
-}
-
-Future<Response> _getNickname(Request request) async {
-  final gameId = request.params['gameId'];
-
-  final userId = request.url.queryParameters['userId'];
-  final zoneId = request.url.queryParameters['zoneId'];
-  if (gameId == null) {
-    return Response.badRequest(
-      body: json
-          .encode({"status": false, "message": "required parameter gameId"}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-  }
-  if (userId == null) {
-    return Response.badRequest(
-      body: json.encode({
-        "status": false,
-        "message": "required parameter userId",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-  }
-  final result = await GetNickname().execute(
-    gameId: gameId,
-    userId: userId,
-    zoneId: zoneId,
-  );
-
-  Response? response;
-  result.fold((l) {
-    response = Response.notFound(
-      json.encode({
-        "status": false,
-        "message": "${l.message} ${gameId}_${userId}_$zoneId",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-  }, (r) {
-    response = Response.ok(
-      json.encode({
-        "status": true,
-        "message": "Success",
-        "data": {
-          "game": r.confirmationFields?.productName,
-          "userId": r.confirmationFields?.userId,
-          "zoneId": r.confirmationFields?.zoneId,
-          "nickname": r.confirmationFields?.username,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-  });
-  return response ??
-      Response.forbidden(
-        json.encode({
-          "status": false,
-          "message": "Forbidden ${gameId}_${userId}_$zoneId",
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
 }
 
 void main(List<String> args) async {

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'codashop_nickname_request_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CodashopNicknameRequestModel {
   @JsonKey(name: "voucherPricePoint.id")
   String voucherPricePointId;
