@@ -8,6 +8,7 @@ import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
 import '../entities/state_of_survival_request_entity.dart';
+import '../entities/valorant_request_entity.dart';
 import '../models/codashop_nickname_model.dart';
 import '../models/codashop_nickname_request_model.dart';
 import '../repositories/app_repository.dart';
@@ -52,6 +53,9 @@ class GetNickname {
       }
       data = amongHeroesRequest(userId: userId, zoneId: zoneId);
     }
+    if (gameId.toLowerCase() == "valorant") {
+      data = valorantRequest(userId: userId);
+    }
 
     if (data == null) {
       return Left(RequestFailure("Invalid game"));
@@ -94,7 +98,8 @@ class GetNickname {
         voucherPricePointId: "3",
         voucherPricePointPrice: "30834.0",
         voucherPricePointVariablePrice: "0",
-        userId: "#$userId",
+        userId:
+            userId.contains("%23") ? userId.replaceAll("%23", "#") : "#$userId",
         voucherTypeName: "HAY_DAY",
         shopLang: "id_ID",
         lvtId: "6263",
@@ -170,5 +175,19 @@ class GetNickname {
             .replaceAll("SEA-", "26"),
         voucherTypeName: "AMONG_HEROES",
         shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel valorantRequest({
+    required String userId,
+  }) =>
+      ValorantRequestEntity(
+        voucherPricePointId: "115689",
+        voucherPricePointPrice: "15000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "VALORANT",
+        voucherTypeId: "109",
+        shopLang: "id_ID",
+        gvtId: "139",
       );
 }
