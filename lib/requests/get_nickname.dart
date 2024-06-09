@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 
 import '../common/failure.dart';
+import '../entities/metal_slug_awakening_request_entity.dart';
 import '../models/codashop_nickname_model.dart';
 import '../models/codashop_nickname_request_model.dart';
 import '../repositories/app_repository.dart';
@@ -34,8 +36,8 @@ class GetNickname {
   CodashopNicknameRequestModel mobileLegendRequest({
     required String userId,
     String? zoneId,
-  }) {
-    return CodashopNicknameRequestModel(
+  }) =>
+      MobileLegendsRequestEntity(
         voucherPricePointId: "4150",
         voucherPricePointPrice: "1579.0",
         voucherPricePointVariablePrice: "0",
@@ -44,18 +46,18 @@ class GetNickname {
         voucherTypeName: "MOBILE_LEGENDS",
         voucherTypeId: "1",
         gvtId: "1",
-        shopLang: "id_ID");
-  }
+        shopLang: "id_ID",
+      );
 
   CodashopNicknameRequestModel metalSlugAwakeningRequest({
     required String userId,
-  }) {
-    return CodashopNicknameRequestModel(
+  }) =>
+      MetalSlugAwakeningRequestEntity(
         voucherPricePointId: "868000",
         voucherPricePointPrice: "15000.0",
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "VNG_METAL_SLUG",
-        shopLang: "id_ID");
-  }
+        shopLang: "id_ID",
+      );
 }
