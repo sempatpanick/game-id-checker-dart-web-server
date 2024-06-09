@@ -22,7 +22,10 @@ CodashopNicknameRequestModel _$CodashopNicknameRequestModelFromJson(
     voucherTypeName: json['voucherTypeName'] as String,
     voucherTypeId: json['voucherTypeId'] as String?,
     gvtId: json['gvtId'] as String?,
+    lvtId: json['lvtId'] as String?,
     shopLang: json['shopLang'] as String,
+    pricePointDynamicSkuToken: json['pricePointDynamicSkuToken'] as String?,
+    dynamicSkuToken: json['dynamicSkuToken'] as String?,
   );
 }
 
@@ -45,6 +48,9 @@ Map<String, dynamic> _$CodashopNicknameRequestModelToJson(
   val['voucherTypeName'] = instance.voucherTypeName;
   writeNotNull('voucherTypeId', instance.voucherTypeId);
   writeNotNull('gvtId', instance.gvtId);
+  writeNotNull('lvtId', instance.lvtId);
   val['shopLang'] = instance.shopLang;
+  writeNotNull('pricePointDynamicSkuToken', instance.pricePointDynamicSkuToken);
+  writeNotNull('dynamicSkuToken', instance.dynamicSkuToken);
   return val;
 }

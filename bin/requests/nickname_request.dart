@@ -13,6 +13,7 @@ class NicknameRequest {
 
     final userId = request.url.queryParameters['userId'];
     final zoneId = request.url.queryParameters['zoneId'];
+
     if (gameId == null) {
       return Response.badRequest(
         body: json.encode(ResponseModel(

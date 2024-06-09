@@ -19,7 +19,13 @@ class CodashopNicknameRequestModel {
   String? voucherTypeId;
   @JsonKey(includeIfNull: false)
   String? gvtId;
+  @JsonKey(includeIfNull: false)
+  String? lvtId;
   String shopLang;
+  @JsonKey(includeIfNull: false)
+  String? pricePointDynamicSkuToken;
+  @JsonKey(includeIfNull: false)
+  String? dynamicSkuToken;
 
   CodashopNicknameRequestModel({
     required this.voucherPricePointId,
@@ -30,7 +36,10 @@ class CodashopNicknameRequestModel {
     required this.voucherTypeName,
     this.voucherTypeId,
     this.gvtId,
+    this.lvtId,
     required this.shopLang,
+    this.pricePointDynamicSkuToken,
+    this.dynamicSkuToken,
   });
 
   factory CodashopNicknameRequestModel.fromJson(Map<String, dynamic> json) =>

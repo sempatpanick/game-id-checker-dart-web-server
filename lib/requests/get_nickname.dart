@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:id_checker/entities/hay_day_request_entity.dart';
 import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 
 import '../common/failure.dart';
@@ -25,6 +26,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "msavng") {
       data = metalSlugAwakeningRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "hayday") {
+      data = hayDayRequest(userId: userId);
     }
 
     if (data == null) {
@@ -59,5 +63,22 @@ class GetNickname {
         userId: userId,
         voucherTypeName: "VNG_METAL_SLUG",
         shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel hayDayRequest({
+    required String userId,
+  }) =>
+      HayDayRequestEntity(
+        voucherPricePointId: "3",
+        voucherPricePointPrice: "30834.0",
+        voucherPricePointVariablePrice: "0",
+        userId: "#$userId",
+        voucherTypeName: "HAY_DAY",
+        shopLang: "id_ID",
+        lvtId: "6263",
+        pricePointDynamicSkuToken:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInBjSWRcIjoyNDAsXCJwcmljZVwiOjMwODM0LjAsXCJjdXJyZW5jeVwiOlwiSURSXCIsXCJhcGlQcmljZVwiOjMwODM0LjAsXCJhcGlQcmljZUN1cnJlbmN5XCI6XCJJRFJcIixcInByaWNlQmVmb3JlVGF4XCI6Mjc3NzguMCxcInRheEFtb3VudFwiOjMwNTYuMCxcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLnNvaWwuY29kYXNob3AuMTBwY3QuZGlhbW9uZHBhY2thZ2UxXCIsXCJsdnRJZFwiOjYyNjN9In0.VVorKtLN9izAYNuTi6wbTne_yg0Al8jc27rt1n-5DtM",
+        dynamicSkuToken:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLnNvaWwuY29kYXNob3AuMTBwY3QuZGlhbW9uZHBhY2thZ2UxXCIsXCJldmVudFBhY2thZ2VcIjpcIjBcIixcImRlbm9tSW1hZ2VVcmxcIjpcImh0dHBzOi8vY2RuMS5jb2Rhc2hvcC5jb20vaW1hZ2VzLzgxOF80YWEyOTQwYy1kNGZhLTRlZjgtYmYwMC1jNGM3OTBkOWUzNTdfSGF5IERheV9pbWFnZS9TdXBlcmNlbGwtSGF5RGF5L0hheURheS9IYXlEYXlfYWxsY291bnRyaWVzXzUwZGlhbW9uZHMxMC5wbmdcIixcImRlbm9tTmFtZVwiOlwiNTAgRGlhbW9uZHMgKyA1IGJvbnVzXCIsXCJkZW5vbUNhdGVnb3J5TmFtZVwiOlwiVW5jYXRlZ29yaXplZFwiLFwidGFnc1wiOltdLFwiY291bnRyeTJOYW1lXCI6XCJJRFwiLFwibHZ0SWRcIjo2MjYzfSJ9.IEaxBFJrjjoV8J8U50lCmDEbB9zYy23OCI7NCpG71Lk",
       );
 }
