@@ -71,10 +71,16 @@ ConfirmationFieldsCodashopNicknameModel
           email: json['email'] as String?,
           inputRoleId: json['inputRoleId'] as String?,
           username: json['username'] as String?,
-        )..roles = (json['roles'] as List<dynamic>?)
-            ?.map((e) => RoleConfirmationFieldsCodashopNicknameModel.fromJson(
-                e as Map<String, dynamic>))
-            .toList();
+        )
+          ..roles = (json['roles'] as List<dynamic>?)
+              ?.map((e) => RoleConfirmationFieldsCodashopNicknameModel.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..roleList = (json['roleList'] as List<dynamic>?)
+              ?.map((e) =>
+                  RoleListConfirmationFieldsCodashopNicknameModel.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic> _$ConfirmationFieldsCodashopNicknameModelToJson(
         ConfirmationFieldsCodashopNicknameModel instance) =>
@@ -95,6 +101,7 @@ Map<String, dynamic> _$ConfirmationFieldsCodashopNicknameModelToJson(
       'inputRoleId': instance.inputRoleId,
       'username': instance.username,
       'roles': instance.roles?.map((e) => e.toJson()).toList(),
+      'roleList': instance.roleList?.map((e) => e.toJson()).toList(),
     };
 
 RoleConfirmationFieldsCodashopNicknameModel
@@ -118,6 +125,21 @@ Map<String, dynamic> _$RoleConfirmationFieldsCodashopNicknameModelToJson(
       'role_id': instance.roleId,
       'client_type': instance.clientType,
       'server_id': instance.serverId,
+    };
+
+RoleListConfirmationFieldsCodashopNicknameModel
+    _$RoleListConfirmationFieldsCodashopNicknameModelFromJson(
+            Map<String, dynamic> json) =>
+        RoleListConfirmationFieldsCodashopNicknameModel(
+          roleId: json['roleId'] as String?,
+          roleName: json['roleName'] as String?,
+        );
+
+Map<String, dynamic> _$RoleListConfirmationFieldsCodashopNicknameModelToJson(
+        RoleListConfirmationFieldsCodashopNicknameModel instance) =>
+    <String, dynamic>{
+      'roleId': instance.roleId,
+      'roleName': instance.roleName,
     };
 
 UserCodashopNicknameModel _$UserCodashopNicknameModelFromJson(

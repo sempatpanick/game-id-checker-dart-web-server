@@ -7,13 +7,20 @@ class NicknameResponseModel {
   String? gameName;
   String? userId;
   String? zoneId;
+  @JsonKey(includeIfNull: false)
+  String? zoneName;
+  @JsonKey(includeIfNull: false)
   String? nickname;
+  @JsonKey(includeIfNull: false)
+  List<String>? nicknames;
 
   NicknameResponseModel({
     this.gameName,
     this.userId,
     this.zoneId,
+    this.zoneName,
     this.nickname,
+    this.nicknames,
   });
 
   factory NicknameResponseModel.fromJson(Map<String, dynamic> json) =>

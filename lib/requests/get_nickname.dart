@@ -3,6 +3,7 @@ import 'package:id_checker/entities/hay_day_request_entity.dart';
 import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 
 import '../common/failure.dart';
+import '../entities/among_heroes_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
@@ -44,6 +45,12 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "sos") {
       data = stateOfSurvivalRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "amongheroes") {
+      if (zoneId == null) {
+        return Left(RequestFailure("required parameter zoneId"));
+      }
+      data = amongHeroesRequest(userId: userId, zoneId: zoneId);
     }
 
     if (data == null) {
@@ -144,6 +151,24 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "STATE_OF_SURVIVAL",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel amongHeroesRequest({
+    required String userId,
+    required String zoneId,
+  }) =>
+      AmongHeroesRequestEntity(
+        voucherPricePointId: "872023",
+        voucherPricePointPrice: "16000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        userZoneId: zoneId
+            .replaceAll("VN-", "11")
+            .replaceAll("TH-", "16")
+            .replaceAll("ID-", "21")
+            .replaceAll("SEA-", "26"),
+        voucherTypeName: "AMONG_HEROES",
         shopLang: "id_ID",
       );
 }

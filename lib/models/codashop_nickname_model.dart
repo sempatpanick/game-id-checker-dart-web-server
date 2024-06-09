@@ -50,11 +50,27 @@ class CodashopNicknameModel {
             confirmationFields?.productName?.replaceAll("Top-up", "").trim(),
         userId: confirmationFields?.userId,
         zoneId: confirmationFields?.zoneId,
-        nickname: confirmationFields?.username ??
-            confirmationFields?.roles
+        zoneName: (confirmationFields?.roleList
+                        ?.where((item) => item.roleName != null) ??
+                    [])
+                .isEmpty
+            ? null
+            : confirmationFields?.zoneId
+                ?.replaceAll("11", "VN-")
+                .replaceAll("16", "TH-")
+                .replaceAll("21", "ID-")
+                .replaceAll("26", "SEA-"),
+        nickname: confirmationFields?.username != null &&
+                confirmationFields?.username != "null"
+            ? confirmationFields?.username
+            : confirmationFields?.roles
                 ?.where((item) => (item.role ?? "").isNotEmpty)
                 .firstOrNull
                 ?.role,
+        nicknames: confirmationFields?.roleList
+            ?.where((item) => item.roleName != null)
+            .map((item) => item.roleName!)
+            .toList(),
       );
 }
 
@@ -76,6 +92,7 @@ class ConfirmationFieldsCodashopNicknameModel {
   String? inputRoleId;
   String? username;
   List<RoleConfirmationFieldsCodashopNicknameModel>? roles;
+  List<RoleListConfirmationFieldsCodashopNicknameModel>? roleList;
 
   ConfirmationFieldsCodashopNicknameModel({
     this.zipCode,
@@ -131,6 +148,24 @@ class RoleConfirmationFieldsCodashopNicknameModel {
 
   Map<String, dynamic> toJson() =>
       _$RoleConfirmationFieldsCodashopNicknameModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class RoleListConfirmationFieldsCodashopNicknameModel {
+  String? roleId;
+  String? roleName;
+
+  RoleListConfirmationFieldsCodashopNicknameModel({
+    this.roleId,
+    this.roleName,
+  });
+
+  factory RoleListConfirmationFieldsCodashopNicknameModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$RoleListConfirmationFieldsCodashopNicknameModelFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$RoleListConfirmationFieldsCodashopNicknameModelToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
