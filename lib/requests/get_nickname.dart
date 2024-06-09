@@ -5,6 +5,7 @@ import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 import '../common/failure.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
+import '../entities/one_punch_man_the_strongest_request_entity.dart';
 import '../models/codashop_nickname_model.dart';
 import '../models/codashop_nickname_request_model.dart';
 import '../repositories/app_repository.dart';
@@ -33,6 +34,12 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "ffmax") {
       data = freeFireMaxRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "opmts") {
+      if (zoneId == null) {
+        return Left(RequestFailure("required parameter zoneId"));
+      }
+      data = onePunchManTheStrongestMaxRequest(userId: userId, zoneId: zoneId);
     }
 
     if (data == null) {
@@ -107,6 +114,20 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "FREEFIRE",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel onePunchManTheStrongestMaxRequest({
+    required String userId,
+    required String zoneId,
+  }) =>
+      OnePunchManTheStrongestRequestEntity(
+        voucherPricePointId: "77738",
+        voucherPricePointPrice: "10890.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        userZoneId: zoneId,
+        voucherTypeName: "ONE_PUNCH_MAN",
         shopLang: "id_ID",
       );
 }
