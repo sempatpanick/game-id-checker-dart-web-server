@@ -6,6 +6,7 @@ import '../common/failure.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
+import '../entities/state_of_survival_request_entity.dart';
 import '../models/codashop_nickname_model.dart';
 import '../models/codashop_nickname_request_model.dart';
 import '../repositories/app_repository.dart';
@@ -40,6 +41,9 @@ class GetNickname {
         return Left(RequestFailure("required parameter zoneId"));
       }
       data = onePunchManTheStrongestMaxRequest(userId: userId, zoneId: zoneId);
+    }
+    if (gameId.toLowerCase() == "sos") {
+      data = stateOfSurvivalRequest(userId: userId);
     }
 
     if (data == null) {
@@ -128,6 +132,18 @@ class GetNickname {
         userId: userId,
         userZoneId: zoneId,
         voucherTypeName: "ONE_PUNCH_MAN",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel stateOfSurvivalRequest({
+    required String userId,
+  }) =>
+      StateOfSurvivalRequestEntity(
+        voucherPricePointId: "409041",
+        voucherPricePointPrice: "17760.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "STATE_OF_SURVIVAL",
         shopLang: "id_ID",
       );
 }
