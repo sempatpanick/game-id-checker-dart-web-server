@@ -46,10 +46,15 @@ class CodashopNicknameModel {
   Map<String, dynamic> toJson() => _$CodashopNicknameModelToJson(this);
 
   NicknameResponseModel toResponse() => NicknameResponseModel(
-        gameName: confirmationFields?.productName,
+        gameName:
+            confirmationFields?.productName?.replaceAll("Top-up", "").trim(),
         userId: confirmationFields?.userId,
         zoneId: confirmationFields?.zoneId,
-        nickname: confirmationFields?.username,
+        nickname: confirmationFields?.username ??
+            confirmationFields?.roles
+                ?.where((item) => (item.role ?? "").isNotEmpty)
+                .firstOrNull
+                ?.role,
       );
 }
 
@@ -70,6 +75,7 @@ class ConfirmationFieldsCodashopNicknameModel {
   String? email;
   String? inputRoleId;
   String? username;
+  List<RoleConfirmationFieldsCodashopNicknameModel>? roles;
 
   ConfirmationFieldsCodashopNicknameModel({
     this.zipCode,
@@ -95,6 +101,36 @@ class ConfirmationFieldsCodashopNicknameModel {
 
   Map<String, dynamic> toJson() =>
       _$ConfirmationFieldsCodashopNicknameModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class RoleConfirmationFieldsCodashopNicknameModel {
+  @JsonKey(name: "packed_role_id")
+  String? packedRoleId;
+  String? server;
+  String? role;
+  @JsonKey(name: "role_id")
+  String? roleId;
+  @JsonKey(name: "client_type")
+  String? clientType;
+  @JsonKey(name: "server_id")
+  String? serverId;
+
+  RoleConfirmationFieldsCodashopNicknameModel({
+    this.packedRoleId,
+    this.server,
+    this.role,
+    this.roleId,
+    this.clientType,
+    this.serverId,
+  });
+
+  factory RoleConfirmationFieldsCodashopNicknameModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$RoleConfirmationFieldsCodashopNicknameModelFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$RoleConfirmationFieldsCodashopNicknameModelToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)

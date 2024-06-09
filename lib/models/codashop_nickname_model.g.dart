@@ -71,7 +71,10 @@ ConfirmationFieldsCodashopNicknameModel
           email: json['email'] as String?,
           inputRoleId: json['inputRoleId'] as String?,
           username: json['username'] as String?,
-        );
+        )..roles = (json['roles'] as List<dynamic>?)
+            ?.map((e) => RoleConfirmationFieldsCodashopNicknameModel.fromJson(
+                e as Map<String, dynamic>))
+            .toList();
 
 Map<String, dynamic> _$ConfirmationFieldsCodashopNicknameModelToJson(
         ConfirmationFieldsCodashopNicknameModel instance) =>
@@ -91,6 +94,30 @@ Map<String, dynamic> _$ConfirmationFieldsCodashopNicknameModelToJson(
       'email': instance.email,
       'inputRoleId': instance.inputRoleId,
       'username': instance.username,
+      'roles': instance.roles?.map((e) => e.toJson()).toList(),
+    };
+
+RoleConfirmationFieldsCodashopNicknameModel
+    _$RoleConfirmationFieldsCodashopNicknameModelFromJson(
+            Map<String, dynamic> json) =>
+        RoleConfirmationFieldsCodashopNicknameModel(
+          packedRoleId: json['packed_role_id'] as String?,
+          server: json['server'] as String?,
+          role: json['role'] as String?,
+          roleId: json['role_id'] as String?,
+          clientType: json['client_type'] as String?,
+          serverId: json['server_id'] as String?,
+        );
+
+Map<String, dynamic> _$RoleConfirmationFieldsCodashopNicknameModelToJson(
+        RoleConfirmationFieldsCodashopNicknameModel instance) =>
+    <String, dynamic>{
+      'packed_role_id': instance.packedRoleId,
+      'server': instance.server,
+      'role': instance.role,
+      'role_id': instance.roleId,
+      'client_type': instance.clientType,
+      'server_id': instance.serverId,
     };
 
 UserCodashopNicknameModel _$UserCodashopNicknameModelFromJson(

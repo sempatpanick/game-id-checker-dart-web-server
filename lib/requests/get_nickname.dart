@@ -3,6 +3,7 @@ import 'package:id_checker/entities/hay_day_request_entity.dart';
 import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 
 import '../common/failure.dart';
+import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../models/codashop_nickname_model.dart';
 import '../models/codashop_nickname_request_model.dart';
@@ -29,6 +30,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "hayday") {
       data = hayDayRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "ffmax") {
+      data = freeFireMaxRequest(userId: userId);
     }
 
     if (data == null) {
@@ -80,5 +84,29 @@ class GetNickname {
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInBjSWRcIjoyNDAsXCJwcmljZVwiOjMwODM0LjAsXCJjdXJyZW5jeVwiOlwiSURSXCIsXCJhcGlQcmljZVwiOjMwODM0LjAsXCJhcGlQcmljZUN1cnJlbmN5XCI6XCJJRFJcIixcInByaWNlQmVmb3JlVGF4XCI6Mjc3NzguMCxcInRheEFtb3VudFwiOjMwNTYuMCxcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLnNvaWwuY29kYXNob3AuMTBwY3QuZGlhbW9uZHBhY2thZ2UxXCIsXCJsdnRJZFwiOjYyNjN9In0.VVorKtLN9izAYNuTi6wbTne_yg0Al8jc27rt1n-5DtM",
         dynamicSkuToken:
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLnNvaWwuY29kYXNob3AuMTBwY3QuZGlhbW9uZHBhY2thZ2UxXCIsXCJldmVudFBhY2thZ2VcIjpcIjBcIixcImRlbm9tSW1hZ2VVcmxcIjpcImh0dHBzOi8vY2RuMS5jb2Rhc2hvcC5jb20vaW1hZ2VzLzgxOF80YWEyOTQwYy1kNGZhLTRlZjgtYmYwMC1jNGM3OTBkOWUzNTdfSGF5IERheV9pbWFnZS9TdXBlcmNlbGwtSGF5RGF5L0hheURheS9IYXlEYXlfYWxsY291bnRyaWVzXzUwZGlhbW9uZHMxMC5wbmdcIixcImRlbm9tTmFtZVwiOlwiNTAgRGlhbW9uZHMgKyA1IGJvbnVzXCIsXCJkZW5vbUNhdGVnb3J5TmFtZVwiOlwiVW5jYXRlZ29yaXplZFwiLFwidGFnc1wiOltdLFwiY291bnRyeTJOYW1lXCI6XCJJRFwiLFwibHZ0SWRcIjo2MjYzfSJ9.IEaxBFJrjjoV8J8U50lCmDEbB9zYy23OCI7NCpG71Lk",
+      );
+
+  CodashopNicknameRequestModel freeFireRequest({
+    required String userId,
+  }) =>
+      FreeFireRequestEntity(
+        voucherPricePointId: "20500",
+        voucherPricePointPrice: "1000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "FREEFIRE",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel freeFireMaxRequest({
+    required String userId,
+  }) =>
+      FreeFireRequestEntity(
+        voucherPricePointId: "232851",
+        voucherPricePointPrice: "1000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "FREEFIRE",
+        shopLang: "id_ID",
       );
 }
