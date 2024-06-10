@@ -12,6 +12,7 @@ import '../entities/clash_royale_request_entity.dart';
 import '../entities/dragon_city_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/genshin_impact_request_entity.dart';
+import '../entities/league_of_legends_wild_rift_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
 import '../entities/state_of_survival_request_entity.dart';
@@ -69,6 +70,9 @@ class GetNickname {
         return Left(RequestFailure("required parameter zoneId"));
       }
       data = amongHeroesRequest(userId: userId, zoneId: zoneId);
+    }
+    if (gameId.toLowerCase() == "lolwr") {
+      data = leagueOfLegendsWildRiftRequest(userId: userId);
     }
     if (gameId.toLowerCase() == "valorant") {
       data = valorantRequest(userId: userId);
@@ -279,6 +283,20 @@ class GetNickname {
             .replaceAll("SEA-", "26"),
         voucherTypeName: "AMONG_HEROES",
         shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel leagueOfLegendsWildRiftRequest({
+    required String userId,
+  }) =>
+      LeagueOfLegendsWildRiftRequestEntity(
+        voucherPricePointId: "371528",
+        voucherPricePointPrice: "15000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "WILD_RIFT",
+        voucherTypeId: "127",
+        shopLang: "id_ID",
+        gvtId: "160",
       );
 
   CodashopNicknameRequestModel valorantRequest({
