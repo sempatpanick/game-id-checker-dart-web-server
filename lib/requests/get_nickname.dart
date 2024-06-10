@@ -9,6 +9,7 @@ import '../entities/brawl_stars_request_entity.dart';
 import '../entities/call_of_duty_mobile_request_entity.dart';
 import '../entities/clash_of_clans_request_entity.dart';
 import '../entities/clash_royale_request_entity.dart';
+import '../entities/dragon_city_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
@@ -75,6 +76,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "aov") {
       data = arenaOfValorRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "dc") {
+      data = dragonCityRequest(userId: userId);
     }
 
     if (data == null) {
@@ -274,6 +278,18 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "AOV",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel dragonCityRequest({
+    required String userId,
+  }) =>
+      DragonCityRequestEntity(
+        voucherPricePointId: "254191",
+        voucherPricePointPrice: "28600.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "DRAGON_CITY",
         shopLang: "id_ID",
       );
 }
