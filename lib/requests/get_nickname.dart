@@ -6,6 +6,7 @@ import '../common/failure.dart';
 import '../entities/among_heroes_request_entity.dart';
 import '../entities/arena_of_valor_request_entity.dart';
 import '../entities/call_of_duty_mobile_request_entity.dart';
+import '../entities/clash_of_clans_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
@@ -63,6 +64,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "aov") {
       data = arenaOfValorRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "coc") {
+      data = clashOfClansRequest(userId: userId);
     }
 
     if (data == null) {
@@ -220,6 +224,18 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "AOV",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel clashOfClansRequest({
+    required String userId,
+  }) =>
+      ClashOfClansRequestEntity(
+        voucherPricePointId: "453699",
+        voucherPricePointPrice: "16000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "CLASH_OF_CLANS",
         shopLang: "id_ID",
       );
 }
