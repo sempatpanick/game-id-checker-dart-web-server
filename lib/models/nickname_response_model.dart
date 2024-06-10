@@ -6,9 +6,12 @@ part 'nickname_response_model.g.dart';
 class NicknameResponseModel {
   String? gameName;
   String? userId;
+  @JsonKey(includeIfNull: false)
   String? zoneId;
   @JsonKey(includeIfNull: false)
   String? zoneName;
+  @JsonKey(includeIfNull: false)
+  String? server;
   @JsonKey(includeIfNull: false)
   String? nickname;
   @JsonKey(includeIfNull: false)
@@ -19,6 +22,7 @@ class NicknameResponseModel {
     this.userId,
     this.zoneId,
     this.zoneName,
+    this.server,
     this.nickname,
     this.nicknames,
   });

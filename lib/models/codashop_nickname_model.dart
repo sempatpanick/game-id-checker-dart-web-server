@@ -60,6 +60,10 @@ class CodashopNicknameModel {
                 .replaceAll("16", "TH-")
                 .replaceAll("21", "ID-")
                 .replaceAll("26", "SEA-"),
+        server: confirmationFields?.roles
+            ?.where((item) => (item.role ?? "").isNotEmpty)
+            .firstOrNull
+            ?.server,
         nickname: confirmationFields?.username != null &&
                 confirmationFields?.username != "null"
             ? confirmationFields?.username

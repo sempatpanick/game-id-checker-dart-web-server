@@ -4,6 +4,7 @@ import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 
 import '../common/failure.dart';
 import '../entities/among_heroes_request_entity.dart';
+import '../entities/arena_of_valor_request_entity.dart';
 import '../entities/call_of_duty_mobile_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
@@ -59,6 +60,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "codm") {
       data = callOfDutyMobileRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "aov") {
+      data = arenaOfValorRequest(userId: userId);
     }
 
     if (data == null) {
@@ -204,6 +208,18 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "CALL_OF_DUTY",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel arenaOfValorRequest({
+    required String userId,
+  }) =>
+      ArenaOfValorRequestEntity(
+        voucherPricePointId: "20486",
+        voucherPricePointPrice: "10000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "AOV",
         shopLang: "id_ID",
       );
 }
