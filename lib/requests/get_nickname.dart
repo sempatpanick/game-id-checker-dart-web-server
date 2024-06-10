@@ -5,6 +5,7 @@ import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 import '../common/failure.dart';
 import '../entities/among_heroes_request_entity.dart';
 import '../entities/arena_of_valor_request_entity.dart';
+import '../entities/brawl_stars_request_entity.dart';
 import '../entities/call_of_duty_mobile_request_entity.dart';
 import '../entities/clash_of_clans_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
@@ -35,8 +36,14 @@ class GetNickname {
     if (gameId.toLowerCase() == "msavng") {
       data = metalSlugAwakeningRequest(userId: userId);
     }
+    if (gameId.toLowerCase() == "coc") {
+      data = clashOfClansRequest(userId: userId);
+    }
     if (gameId.toLowerCase() == "hayday") {
       data = hayDayRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "brawlstars") {
+      data = brawlStarsRequest(userId: userId);
     }
     if (gameId.toLowerCase() == "ffmax") {
       data = freeFireMaxRequest(userId: userId);
@@ -64,9 +71,6 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "aov") {
       data = arenaOfValorRequest(userId: userId);
-    }
-    if (gameId.toLowerCase() == "coc") {
-      data = clashOfClansRequest(userId: userId);
     }
 
     if (data == null) {
@@ -103,6 +107,18 @@ class GetNickname {
         shopLang: "id_ID",
       );
 
+  CodashopNicknameRequestModel clashOfClansRequest({
+    required String userId,
+  }) =>
+      ClashOfClansRequestEntity(
+        voucherPricePointId: "453699",
+        voucherPricePointPrice: "16000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId.startsWith("#") ? userId : "#$userId",
+        voucherTypeName: "CLASH_OF_CLANS",
+        shopLang: "id_ID",
+      );
+
   CodashopNicknameRequestModel hayDayRequest({
     required String userId,
   }) =>
@@ -110,8 +126,7 @@ class GetNickname {
         voucherPricePointId: "3",
         voucherPricePointPrice: "30834.0",
         voucherPricePointVariablePrice: "0",
-        userId:
-            userId.contains("%23") ? userId.replaceAll("%23", "#") : "#$userId",
+        userId: userId.startsWith("#") ? userId : "#$userId",
         voucherTypeName: "HAY_DAY",
         shopLang: "id_ID",
         lvtId: "6263",
@@ -119,6 +134,25 @@ class GetNickname {
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInBjSWRcIjoyNDAsXCJwcmljZVwiOjMwODM0LjAsXCJjdXJyZW5jeVwiOlwiSURSXCIsXCJhcGlQcmljZVwiOjMwODM0LjAsXCJhcGlQcmljZUN1cnJlbmN5XCI6XCJJRFJcIixcInByaWNlQmVmb3JlVGF4XCI6Mjc3NzguMCxcInRheEFtb3VudFwiOjMwNTYuMCxcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLnNvaWwuY29kYXNob3AuMTBwY3QuZGlhbW9uZHBhY2thZ2UxXCIsXCJsdnRJZFwiOjYyNjN9In0.VVorKtLN9izAYNuTi6wbTne_yg0Al8jc27rt1n-5DtM",
         dynamicSkuToken:
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLnNvaWwuY29kYXNob3AuMTBwY3QuZGlhbW9uZHBhY2thZ2UxXCIsXCJldmVudFBhY2thZ2VcIjpcIjBcIixcImRlbm9tSW1hZ2VVcmxcIjpcImh0dHBzOi8vY2RuMS5jb2Rhc2hvcC5jb20vaW1hZ2VzLzgxOF80YWEyOTQwYy1kNGZhLTRlZjgtYmYwMC1jNGM3OTBkOWUzNTdfSGF5IERheV9pbWFnZS9TdXBlcmNlbGwtSGF5RGF5L0hheURheS9IYXlEYXlfYWxsY291bnRyaWVzXzUwZGlhbW9uZHMxMC5wbmdcIixcImRlbm9tTmFtZVwiOlwiNTAgRGlhbW9uZHMgKyA1IGJvbnVzXCIsXCJkZW5vbUNhdGVnb3J5TmFtZVwiOlwiVW5jYXRlZ29yaXplZFwiLFwidGFnc1wiOltdLFwiY291bnRyeTJOYW1lXCI6XCJJRFwiLFwibHZ0SWRcIjo2MjYzfSJ9.IEaxBFJrjjoV8J8U50lCmDEbB9zYy23OCI7NCpG71Lk",
+      );
+
+  CodashopNicknameRequestModel brawlStarsRequest({
+    required String userId,
+  }) =>
+      BrawlStarsRequestEntity(
+        voucherPricePointId: "3",
+        voucherPricePointPrice: "30834.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId.startsWith("#") ? userId : "#$userId",
+        voucherTypeName: "BRAWL_STATS",
+        voucherTypeId: "329",
+        shopLang: "id_ID",
+        gvtId: "463",
+        lvtId: "6191",
+        pricePointDynamicSkuToken:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInBjSWRcIjoyNDAsXCJwcmljZVwiOjMwODM0LjAsXCJjdXJyZW5jeVwiOlwiSURSXCIsXCJhcGlQcmljZVwiOjMwODM0LjAsXCJhcGlQcmljZUN1cnJlbmN5XCI6XCJJRFJcIixcInByaWNlQmVmb3JlVGF4XCI6Mjc3NzguMCxcInRheEFtb3VudFwiOjMwNTYuMCxcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLmxhc2VyLmNvZGExMC5nZW1wYWNrMFwiLFwibHZ0SWRcIjo2MTkxfSJ9.DKvODiu7vr2GxGQpTtYWeZAYW8-fdCztvvcfimqrHJM",
+        dynamicSkuToken:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkeW5hbWljU2t1SW5mbyI6IntcInNrdUlkXCI6XCJjb20uc3VwZXJjZWxsLmxhc2VyLmNvZGExMC5nZW1wYWNrMFwiLFwiZXZlbnRQYWNrYWdlXCI6XCIwXCIsXCJkZW5vbUltYWdlVXJsXCI6XCJodHRwczovL2NkbjEuY29kYXNob3AuY29tL2ltYWdlcy84MThfZTA0NzFmZDktNTNhMi00ZWEyLWI4ZGUtNWRmY2JlYzkxMDA1X0JyYXdsIFN0YXJzX2ltYWdlL0JyYXdsU3RhcnNfMzNfR2Vtcy5wbmdcIixcImRlbm9tTmFtZVwiOlwiMzAgR2VtcyArIDMgYm9udXNcIixcImRlbm9tQ2F0ZWdvcnlOYW1lXCI6XCJVbmNhdGVnb3JpemVkXCIsXCJ0YWdzXCI6W10sXCJjb3VudHJ5Mk5hbWVcIjpcIklEXCIsXCJsdnRJZFwiOjYxOTF9In0.pmiA3Zf-CalBGecH3H2R228N3HXVsy5IttoyRwiJT_c",
       );
 
   CodashopNicknameRequestModel freeFireRequest({
@@ -224,18 +258,6 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "AOV",
-        shopLang: "id_ID",
-      );
-
-  CodashopNicknameRequestModel clashOfClansRequest({
-    required String userId,
-  }) =>
-      ClashOfClansRequestEntity(
-        voucherPricePointId: "453699",
-        voucherPricePointPrice: "16000.0",
-        voucherPricePointVariablePrice: "0",
-        userId: userId,
-        voucherTypeName: "CLASH_OF_CLANS",
         shopLang: "id_ID",
       );
 }
