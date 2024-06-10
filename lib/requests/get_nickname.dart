@@ -11,6 +11,7 @@ import '../entities/clash_of_clans_request_entity.dart';
 import '../entities/clash_royale_request_entity.dart';
 import '../entities/dragon_city_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
+import '../entities/genshin_impact_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
 import '../entities/state_of_survival_request_entity.dart';
@@ -83,6 +84,39 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "supersus") {
       data = superSusRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "genshinimpact") {
+      String? zoneIdFiltered;
+      if (zoneId == null) {
+        if (userId.startsWith("6")) zoneIdFiltered = "os_usa";
+        if (userId.startsWith("7")) zoneIdFiltered = "os_euro";
+        if (userId.startsWith("8")) zoneIdFiltered = "os_asia";
+        if (userId.startsWith("9")) zoneIdFiltered = "os_cht";
+      }
+      if (zoneId?.toLowerCase() == "america" ||
+          zoneId?.toLowerCase() == "usa") {
+        zoneIdFiltered = "os_usa";
+      }
+      if (zoneId?.toLowerCase() == "europe" ||
+          zoneId?.toLowerCase() == "euro") {
+        zoneIdFiltered = "os_euro";
+      }
+      if (zoneId?.toLowerCase() == "asia") {
+        zoneIdFiltered = "os_asia";
+      }
+      if ((zoneId?.toLowerCase().contains("tw") ?? false) ||
+          (zoneId?.toLowerCase().contains("hk") ?? false) ||
+          (zoneId?.toLowerCase().contains("mo") ?? false)) {
+        zoneIdFiltered = "os_cht";
+      }
+      if (zoneIdFiltered == null) {
+        return Left(RequestFailure(
+          zoneId != null
+              ? "invalid zoneId, try to remove the parameter zoneId for automatically detect zoneId"
+              : "failed to decide zone id, please put it manually by adding zoneId parameter",
+        ));
+      }
+      data = genshinImpactRequest(userId: userId, zoneId: zoneIdFiltered);
     }
 
     if (data == null) {
@@ -306,6 +340,20 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "SUPER_SUS",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel genshinImpactRequest({
+    required String userId,
+    required String zoneId,
+  }) =>
+      GenshinImpactRequestEntity(
+        voucherPricePointId: "116052",
+        voucherPricePointPrice: "16500.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        userZoneId: zoneId,
+        voucherTypeName: "GENSHIN_IMPACT",
         shopLang: "id_ID",
       );
 }
