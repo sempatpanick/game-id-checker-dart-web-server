@@ -128,6 +128,8 @@ class RoleConfirmationFieldsCodashopNicknameModel {
   String? role;
   @JsonKey(name: "role_id")
   String? roleId;
+  @JsonKey(name: "player_id")
+  String? playerId;
   @JsonKey(name: "client_type")
   String? clientType;
   @JsonKey(name: "server_id")
@@ -138,6 +140,7 @@ class RoleConfirmationFieldsCodashopNicknameModel {
     this.server,
     this.role,
     this.roleId,
+    this.playerId,
     this.clientType,
     this.serverId,
   });

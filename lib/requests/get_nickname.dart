@@ -4,6 +4,7 @@ import 'package:id_checker/entities/mobile_legends_request_entity.dart';
 
 import '../common/failure.dart';
 import '../entities/among_heroes_request_entity.dart';
+import '../entities/call_of_duty_mobile_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
@@ -55,6 +56,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "valorant") {
       data = valorantRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "codm") {
+      data = callOfDutyMobileRequest(userId: userId);
     }
 
     if (data == null) {
@@ -189,5 +193,17 @@ class GetNickname {
         voucherTypeId: "109",
         shopLang: "id_ID",
         gvtId: "139",
+      );
+
+  CodashopNicknameRequestModel callOfDutyMobileRequest({
+    required String userId,
+  }) =>
+      CallOfDutyMobileRequestEntity(
+        voucherPricePointId: "46121",
+        voucherPricePointPrice: "5000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "CALL_OF_DUTY",
+        shopLang: "id_ID",
       );
 }

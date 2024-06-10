@@ -112,6 +112,7 @@ RoleConfirmationFieldsCodashopNicknameModel
           server: json['server'] as String?,
           role: json['role'] as String?,
           roleId: json['role_id'] as String?,
+          playerId: json['player_id'] as String?,
           clientType: json['client_type'] as String?,
           serverId: json['server_id'] as String?,
         );
@@ -123,6 +124,7 @@ Map<String, dynamic> _$RoleConfirmationFieldsCodashopNicknameModelToJson(
       'server': instance.server,
       'role': instance.role,
       'role_id': instance.roleId,
+      'player_id': instance.playerId,
       'client_type': instance.clientType,
       'server_id': instance.serverId,
     };
