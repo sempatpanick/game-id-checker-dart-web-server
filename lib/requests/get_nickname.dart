@@ -14,6 +14,7 @@ import '../entities/free_fire_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
 import '../entities/state_of_survival_request_entity.dart';
+import '../entities/super_sus_request_entity.dart';
 import '../entities/valorant_request_entity.dart';
 import '../models/codashop_nickname_model.dart';
 import '../models/codashop_nickname_request_model.dart';
@@ -79,6 +80,9 @@ class GetNickname {
     }
     if (gameId.toLowerCase() == "dc") {
       data = dragonCityRequest(userId: userId);
+    }
+    if (gameId.toLowerCase() == "supersus") {
+      data = superSusRequest(userId: userId);
     }
 
     if (data == null) {
@@ -290,6 +294,18 @@ class GetNickname {
         voucherPricePointVariablePrice: "0",
         userId: userId,
         voucherTypeName: "DRAGON_CITY",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel superSusRequest({
+    required String userId,
+  }) =>
+      SuperSusRequestEntity(
+        voucherPricePointId: "266075",
+        voucherPricePointPrice: "13000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "SUPER_SUS",
         shopLang: "id_ID",
       );
 }
