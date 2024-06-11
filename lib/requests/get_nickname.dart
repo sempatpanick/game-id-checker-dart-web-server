@@ -12,6 +12,7 @@ import '../entities/clash_royale_request_entity.dart';
 import '../entities/dragon_city_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/genshin_impact_request_entity.dart';
+import '../entities/honkai_star_rail_request_entity.dart';
 import '../entities/league_of_legends_wild_rift_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
 import '../entities/one_punch_man_the_strongest_request_entity.dart';
@@ -121,6 +122,39 @@ class GetNickname {
         ));
       }
       data = genshinImpactRequest(userId: userId, zoneId: zoneIdFiltered);
+    }
+    if (gameId.toLowerCase() == "hsr") {
+      String? zoneIdFiltered;
+      if (zoneId == null) {
+        if (userId.startsWith("6")) zoneIdFiltered = "prod_official_usa";
+        if (userId.startsWith("7")) zoneIdFiltered = "prod_official_eur";
+        if (userId.startsWith("8")) zoneIdFiltered = "prod_official_asia";
+        if (userId.startsWith("9")) zoneIdFiltered = "prod_official_cht";
+      }
+      if (zoneId?.toLowerCase() == "america" ||
+          zoneId?.toLowerCase() == "usa") {
+        zoneIdFiltered = "prod_official_usa";
+      }
+      if (zoneId?.toLowerCase() == "europe" ||
+          zoneId?.toLowerCase() == "euro") {
+        zoneIdFiltered = "prod_official_eur";
+      }
+      if (zoneId?.toLowerCase() == "asia") {
+        zoneIdFiltered = "prod_official_asia";
+      }
+      if ((zoneId?.toLowerCase().contains("tw") ?? false) ||
+          (zoneId?.toLowerCase().contains("hk") ?? false) ||
+          (zoneId?.toLowerCase().contains("mo") ?? false)) {
+        zoneIdFiltered = "prod_official_cht";
+      }
+      if (zoneIdFiltered == null) {
+        return Left(RequestFailure(
+          zoneId != null
+              ? "invalid zoneId, try to remove the parameter zoneId for automatically detect zoneId"
+              : "failed to decide zone id, please put it manually by adding zoneId parameter",
+        ));
+      }
+      data = honkaiStarRailRequest(userId: userId, zoneId: zoneIdFiltered);
     }
 
     if (data == null) {
@@ -372,6 +406,20 @@ class GetNickname {
         userId: userId,
         userZoneId: zoneId,
         voucherTypeName: "GENSHIN_IMPACT",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel honkaiStarRailRequest({
+    required String userId,
+    required String zoneId,
+  }) =>
+      HonkaiStarRailRequestEntity(
+        voucherPricePointId: "855319",
+        voucherPricePointPrice: "16000.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        userZoneId: zoneId,
+        voucherTypeName: "HONKAI_STAR_RAIL",
         shopLang: "id_ID",
       );
 }
