@@ -12,6 +12,7 @@ import '../entities/clash_royale_request_entity.dart';
 import '../entities/dragon_city_request_entity.dart';
 import '../entities/free_fire_request_entity.dart';
 import '../entities/genshin_impact_request_entity.dart';
+import '../entities/honkai_impact_3_request_entity.dart';
 import '../entities/honkai_star_rail_request_entity.dart';
 import '../entities/league_of_legends_wild_rift_request_entity.dart';
 import '../entities/metal_slug_awakening_request_entity.dart';
@@ -90,7 +91,7 @@ class GetNickname {
     if (gameId.toLowerCase() == "supersus") {
       data = superSusRequest(userId: userId);
     }
-    if (gameId.toLowerCase() == "genshinimpact") {
+    if (gameId.toLowerCase() == "gi") {
       String? zoneIdFiltered;
       if (zoneId == null) {
         if (userId.startsWith("6")) zoneIdFiltered = "os_usa";
@@ -155,6 +156,9 @@ class GetNickname {
         ));
       }
       data = honkaiStarRailRequest(userId: userId, zoneId: zoneIdFiltered);
+    }
+    if (gameId.toLowerCase() == "hi3") {
+      data = honkaiImpact3Request(userId: userId);
     }
 
     if (data == null) {
@@ -420,6 +424,18 @@ class GetNickname {
         userId: userId,
         userZoneId: zoneId,
         voucherTypeName: "HONKAI_STAR_RAIL",
+        shopLang: "id_ID",
+      );
+
+  CodashopNicknameRequestModel honkaiImpact3Request({
+    required String userId,
+  }) =>
+      HonkaiImpact3RequestEntity(
+        voucherPricePointId: "48167",
+        voucherPricePointPrice: "16500.0",
+        voucherPricePointVariablePrice: "0",
+        userId: userId,
+        voucherTypeName: "HONKAI_IMPACT",
         shopLang: "id_ID",
       );
 }
